@@ -98,10 +98,39 @@
                         Ajouter un Enseignant
                     </h3>
                 </div>
+                <form action="" method="POST">
                 <div class="card-body flex flex-col gap-5">
-                    Formulaire à créer
-                    <!-- @todo A compléter -->
+                    <div class="input input-sm">
+                        <i class="ki-filled ki-magnifier"></i>
+                        <input placeholder="Nom" type="text" required/>
+                    </div>
+                    <div class="input input-sm">
+                        <i class="ki-filled ki-magnifier"></i>
+                        <input placeholder="Prénom" type="text" required/>
+                    </div>
+                    <div class="input input-sm">
+                        <i class="ki-filled ki-magnifier"></i>
+                        <input placeholder="Email" type="text" required/>
+                    </div>
+                    <div class="input input-sm">
+                        <i class="ki-filled ki-magnifier"></i>
+                        <input placeholder="Téléphone" type="text" required/>
+                    </div>
+                    <div class="input input-sm">
+                        <i class="ki-filled ki-magnifier"></i>
+                        <input placeholder="Mot de passe" type="password" required/>
+                    </div>
+                    <div class="input input-sm">
+                        <i class="ki-filled ki-magnifier"></i>
+                        <input placeholder="Confirmer le mot de passe" type="password" required/>
+                    </div>
+                    <div class="flex justify-end">
+                        <button class="btn btn-primary">Ajouter</button>
+                    </div>
+                    <div class="flex justify-end">
+                        <button class="btn btn-secondary" data-modal-toggle="#student-modal">Annuler</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>

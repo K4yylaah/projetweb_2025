@@ -46,16 +46,16 @@
                                         <td>
                                             <div class="flex flex-col gap-2">
                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
-                                                   href="{{ route('cohort.show', 1) }}">
+                                                   href="{{ route('cohort.index') }}">
                                                     Promotion B1
                                                 </a>
                                                 <span class="text-2sm text-gray-700 font-normal leading-3">
-                                                    Cergy
+                                                    Paris
                                                 </span>
                                             </div>
                                         </td>
                                         <td>2024-2025</td>
-                                        <td>34</td>
+                                        <td>25</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -83,14 +83,15 @@
                         Ajouter une promotion
                     </h3>
                 </div>
+                <form action="{{ route('cohort.store') }}" method="post"></form>
                 <div class="card-body flex flex-col gap-5">
-                    <x-forms.input name="name" :label="__('Nom')" />
+                    <x-forms.input name="name" :label="__('Nom')" required />
 
                     <x-forms.input name="description" :label="__('Description')" />
 
-                    <x-forms.input type="date" name="year" :label="__('Début de l\'année')" placeholder="" />
+                    <x-forms.input type="date" name="year" :label="__('Début de l\'année')" placeholder="" required/>
 
-                    <x-forms.input type="date" name="year" :label="__('Fin de l\'année')" placeholder="" />
+                    <x-forms.input type="date" name="year" :label="__('Fin de l\'année')" placeholder="" required/>
 
                     <x-forms.primary-button>
                         {{ __('Valider') }}

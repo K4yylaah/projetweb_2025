@@ -18,7 +18,6 @@ class CohortController extends Controller
         return view('pages.cohorts.index');
     }
 
-
     /**
      * Display a specific cohort
      * @param Cohort $cohort
