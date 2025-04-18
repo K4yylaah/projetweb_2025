@@ -14,11 +14,25 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Block 1
+                            Mes promotions
                         </h3>
                     </div>
-                    <div class="card-body flex flex-col gap-5">
+                    @php
+                        $promotions = \App\Models\Cohort::all();
+                    @endphp
 
+                    <div class="card-body flex flex-col gap-5">
+                        @foreach ($promotions as $promotion)
+                            <div class="flex flex-col gap-2">
+                                <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
+                                    href="{{ route('cohort.show', $promotion->id) }}">
+                                    {{ $promotion->name }}
+                                </a>
+                                <span class="text-2sm text-gray-700 font-normal leading-3">
+                                    {{ $promotion->start_year }} - {{ $promotion->end_year }}
+                                </span>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -27,7 +41,7 @@
             <div class="card card-grid h-full min-w-full">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Block 2
+                        Bilan de compétences
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">

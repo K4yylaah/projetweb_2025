@@ -5,10 +5,11 @@ namespace App\View\Components\Main;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\Notification;
+use App\Models\User;
 
 class Notifications extends Component
-{
-    /**
+{    /**
      * Create a new component instance.
      */
     public function __construct()

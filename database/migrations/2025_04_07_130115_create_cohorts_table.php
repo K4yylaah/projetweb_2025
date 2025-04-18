@@ -12,18 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cohorts', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-
             $table->id();
-            $table->unsignedBigInteger('school_id'); // Linked with Admin User ID
+            $table->unsignedBigInteger('school_id');
             $table->string('name');
-            $table->string('description');
-            $table->datetime('start_date');
-            $table->datetime('end_date');
+            $table->string('description')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
-
-            $table->foreign('school_id')->references('id')->on('schools')
-                    ->onDelete('cascade');
         });
     }
 

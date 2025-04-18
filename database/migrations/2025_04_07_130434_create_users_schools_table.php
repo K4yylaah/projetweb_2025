@@ -20,6 +20,12 @@ return new class extends Migration
             $table->enum('role', ['admin', 'teacher', 'student'])->default('student');
             $table->timestamps();
         });
+
+        Schema::table('users_schools', function (Blueprint $table) {
+            $table->unsignedBigInteger('cohort_id')->nullable()->after('school_id');
+            $table->foreign('cohort_id')->references('id')->on('cohorts')->onDelete('cascade');
+        });
+        
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\UserSchool;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -9,5 +11,65 @@ class StudentController extends Controller
     public function index()
     {
         return view('pages.students.index');
+    }
+
+    public function show($id)
+    {
+        return view('pages.students.show', [
+            'student' => $id
+        ]);
+    }
+    public function create()
+    {
+        return view('pages.student.create');
+    }
+    public function store(Request $request)
+    {   
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+        ]);
+
+        // Logic to create a new student
+        $student = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+            'date_of_birth' => $validated['date_of_birth'],
+        ]);
+
+        // Assuming you have a UserSchool model to associate the student with a school
+        UserSchool::create([
+            'user_id' => $student->id,
+            'school_id' => $request->input('school_id'),
+            'role' => 'student',
+        ]);
+
+        // Logic to store student data
+        // $student = new User();
+        // $student->name = $request->input('name');
+        // $student->email = $request->input('email');
+        // $student->password = bcrypt($request->input('password'));
+        // $student->role = 'student';
+        // $student->save();
+        return redirect()->route('student.index')->with('success', 'Student created successfully.');
+    }
+    public function destroy($id)
+    {
+        // Logic to delete student
+        return redirect()->route('student.index')->with('success', 'Student deleted successfully.');
+    }
+    public function edit($id)
+    {
+        return view('pages.student.edit', [
+            'student' => $id
+        ]);
+    }
+    public function update(Request $request, $id)
+    {
+        // Logic to update student data
+        return redirect()->route('student.index')->with('success', 'Student updated successfully.');
     }
 }

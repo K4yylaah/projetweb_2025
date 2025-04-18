@@ -18,44 +18,61 @@
                             <div class="scrollable-x-auto">
                                 <table class="table table-border" data-datatable-table="true">
                                     <thead>
-                                    <tr>
-                                        <th class="min-w-[135px]">
-                                            <span class="sort asc">
-                                                 <span class="sort-label">Nom</span>
-                                                 <span class="sort-icon"></span>
-                                            </span>
-                                        </th>
-                                        <th class="min-w-[135px]">
-                                            <span class="sort">
-                                                <span class="sort-label">Prénom</span>
-                                                <span class="sort-icon"></span>
-                                            </span>
-                                        </th>
-                                        <th class="min-w-[135px]">
-                                            <span class="sort">
-                                                <span class="sort-label">Date de naissance</span>
-                                                <span class="sort-icon"></span>
-                                            </span>
-                                        </th>
-                                        <th class="max-w-[50px]"></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
                                         <tr>
-                                        <td>Doe</td>
-                                        <td>John</td>
-                                        <td>10/02/2000</td>
-                                        <td class="cursor-pointer pointer">
-                                            <i class="ki-filled ki-trash"></i>
-                                        </td>
-                                    </tr>
-                                    </tbody>
+                                            <th class="min-w-[135px]">
+                                                <span class="sort asc">
+                                                    <span class="sort-label">Nom</span>
+                                                    <span class="sort-icon"></span>
+                                                </span>
+                                            </th>
+                                            <th class="min-w-[135px]">
+                                                <span class="sort">
+                                                    <span class="sort-label">Prénom</span>
+                                                    <span class="sort-icon"></span>
+                                                </span>
+                                            </th>
+                                            <th class="min-w-[135px]">
+                                                <span class="sort">
+                                                    <span class="sort-label">Date de naissance</span>
+                                                    <span class="sort-icon"></span>
+                                                </span>
+                                            </th>
+                                            <th class="max-w-[50px]"></th>
+                                        </tr>
+                                    </thead>
+                                    @php
+                                        $students = \App\Models\UserSchool::where('role', 'student')->get();
+                                    @endphp
+                                    @foreach ($students as $student)
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="flex flex-col gap-2">
+                                                        <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
+                                                            href="{{ route('student.index') }}">
+                                                            {{ $student->name }}
+                                                        </a>
+                                                        <span class="text-2sm text-gray-700 font-normal leading-3">
+                                                            {{ $student->email }}
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td>{{ $student->first_name }}</td>
+                                                <td>{{ $student->birth_date }}</td>
+                                                <td class="cursor-pointer pointer">
+                                                    <i class="ki-filled ki-trash"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                 </table>
+                                @endforeach
                             </div>
-                            <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                            <div
+                                class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
                                 <div class="flex items-center gap-2 order-2 md:order-1">
                                     Show
-                                    <select class="select select-sm w-16" data-datatable-size="true" name="perpage"></select>
+                                    <select class="select select-sm w-16" data-datatable-size="true"
+                                        name="perpage"></select>
                                     per page
                                 </div>
                                 <div class="flex items-center gap-4 order-1 md:order-2">
@@ -76,11 +93,15 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    <x-forms.dropdown name="user_id" :label="__('Etudiant')">
-                        <option value="1">Etudiant 1</option>
+                   <x-forms.dropdown name="user_id" :label="__('Etudiant')">
+                        <x-slot name="options">
+                            @foreach ($students as $student)
+                                <option value="{{ $student->id }}">{{ $student->name }}</option>
+                            @endforeach
+                        </x-slot>
                     </x-forms.dropdown>
 
-                    <x-forms.primary-button>
+                    <x-forms.primary-button type="submit" class="w-full">
                         {{ __('Valider') }}
                     </x-forms.primary-button>
                 </div>

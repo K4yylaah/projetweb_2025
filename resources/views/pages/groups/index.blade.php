@@ -6,5 +6,5 @@
             </span>
         </h1>
     </x-slot>
-
+    
 </x-app-layout>

@@ -10,7 +10,7 @@
             </button>
         </div>
         <div class="modal-body">
-            @yield('modal-content')
+            @yield(section: 'modal-content')
         </div>
     </div>
 </div>
