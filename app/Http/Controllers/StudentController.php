@@ -24,7 +24,7 @@ class StudentController extends Controller
         return view('pages.student.create');
     }
     public function store(Request $request)
-    {   
+    {
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name'  => 'required|string|max:255',
@@ -34,7 +34,7 @@ class StudentController extends Controller
             'school_id' => 'required|exists:schools,id',
         ]);
 
-        // Logic to create a new student
+        //create a new student
         $student = User::create([
             'first_name' => $validated['first_name'],
             'last_name' => $validated['last_name'],
@@ -43,14 +43,13 @@ class StudentController extends Controller
             'birth_date' => $validated['date_of_birth'],
         ]);
 
-        // Assuming you have a UserSchool model to associate the student with a school
+        // assuming you have a UserSchool model to associate the student with a school
         UserSchool::create([
             'user_id' => $student->id,
             'school_id' => $request->input('school_id'),
             'role' => 'student',
         ]);
 
-        // Logic to store student data
         // $student = new User();
         // $student->name = $request->input('name');
         // $student->email = $request->input('email');
@@ -61,7 +60,6 @@ class StudentController extends Controller
     }
     public function destroy($id)
     {
-        // Logic to delete student
         return redirect()->route('student.index')->with('success', 'Student deleted successfully.');
     }
     public function edit($id)
@@ -72,7 +70,6 @@ class StudentController extends Controller
     }
     public function update(Request $request, $id)
     {
-        // Logic to update student data
         return redirect()->route('student.index')->with('success', 'Student updated successfully.');
     }
 }
