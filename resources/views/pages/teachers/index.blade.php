@@ -117,6 +117,21 @@
                                     <label for="password">Mot de passe</label>
                                     <input type="password" name="password" id="last_name" required class="w-full">
                                 </div>
+
+                                <div>
+                                    <label for="birth_date">Date d'anniversaire</label>
+                                    <input type="date" name="birth_date" id="birth_date" required class="w-full">
+                                </div>
+
+                                <select name="school_id" required>
+                                    @php
+                                        $schools = \App\Models\School::all();
+                                    @endphp
+                                    <option value="" disabled selected>Choisir une école</option>
+                                    @foreach ($schools as $school)
+                                        <option value="{{ $school->id }}">{{ $school->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary mt-5">Ajouter</button>
                         </form>

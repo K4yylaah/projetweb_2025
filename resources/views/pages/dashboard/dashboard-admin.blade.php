@@ -17,9 +17,14 @@
                             Étudiants
                         </h3>
                     </div>
-                    <table class="card-header flex items-center justify-between gap-5 p-5 bg-white border-b border-gray-200">
+                    <table>
+                        <thead class="card-header flex items-center justify-between bg-white border-gray-200">
+                            <h3>Listes des étudiants</h3>
+                        </thead>
+                        <tr data-datatable="true" data-datatable-page-size="5">
+                        
                         <td>
-                            <h1>Liste des étudiants</h1>
+                            
                         </td>
                         <td>
                             <div class="input input-sm max-w-48">
@@ -28,9 +33,11 @@
                             </div>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary">
-                                Ajouter un étudiant
-                            </a>
+                            <div>
+                                <a href="{{ route('student.index') }}" class="btn btn-primary">
+                                    Ajouter un étudiant
+                                </a>
+                            </div>
                         </td>
                         </tr>
                         </thead>

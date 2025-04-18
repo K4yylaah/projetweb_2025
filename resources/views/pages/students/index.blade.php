@@ -61,8 +61,8 @@
                                                             <i class="text-success ki-filled ki-shield-tick"></i>
                                                         </a>
 
-                                                        <a class="hover:text-primary cursor-pointer" href="#student-modal"
-                                                            data-modal-toggle="#student-modal">
+                                                        <a class="hover:text-primary cursor-pointer"
+                                                            href="#student-modal" data-modal-toggle="#student-modal">
                                                             <i class="ki-filled ki-cursor"></i>
                                                         </a>
                                                     </div>
@@ -98,20 +98,45 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    Créer un étudiant
-                    <form method="POST" action="{{ route('student.store') }}">
-                        @csrf
-                        <x-forms.input type="text" name="name" :label="__('Nom')" required />
-                        <x-forms.input type="text" name="first_name" :label="__('Prénom')" required />
-                        <x-forms.input type="date" name="birth_date" :label="__('Date de naissance')" required />
-                        <x-forms.input type="email" name="email" :label="__('Email')" required />
-                        <x-forms.input type="password" name="password" :label="__('Mot de passe')" required />
-                        <x-forms.input type="password" name="password_confirmation" :label="__('Confirmation de votre mot de passe')" required />
-                        <x-forms.primary-button type="submit" class="w-full">
-                            {{ __('Ajouter') }}
-                        </x-forms.primary-button>
-                    </form>
-                    
+                    <div class="max-w-2xl mx-auto p-6 bg-white rounded-2xl shadow-md">
+                        <form method="POST" action="{{ route('student.store') }}" class="space-y-5">
+                            @csrf
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <x-forms.input type="text" name="name" :label="__('Nom')" required />
+                                <x-forms.input type="text" name="first_name" :label="__('Prénom')" required />
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <x-forms.input type="date" name="birth_date" :label="__('Date de naissance')" required />
+                                <x-forms.input type="email" name="email" :label="__('Email')" required />
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <x-forms.input type="password" name="password" :label="__('Mot de passe')" required />
+                            </div>
+
+                            <select name="school_id" required>
+                                @php
+                                    $schools = \App\Models\School::all();
+                                @endphp
+                                <option value="" disabled selected accesskey="">Choisir une école</option>
+                                @foreach ($schools as $school)
+                                    <option value="{{ $school->id }}">{{ $school->name }}</option>
+                                @endforeach
+                            </select>
+
+                            <div class="pt-4">
+                                <x-forms.primary-button type="submit"
+                                    class="w-full flex items-center justify-center gap-2">
+                                    <i class="ki-filled ki-plus"></i>
+                                    {{ __('Ajouter') }}
+                                </x-forms.primary-button>
+                            </div>
+                        </form>
+                    </div>
+
+
                 </div>
             </div>
         </div>

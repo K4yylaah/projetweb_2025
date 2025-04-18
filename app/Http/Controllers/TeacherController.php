@@ -23,24 +23,27 @@ class TeacherController extends Controller
     {   
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|max:255',
-            'school_id' => 'required|exists:schools,id',
+            'last_name'  => 'required|string|max:255',
+            'email'      => 'required|string|email|max:255|unique:users,email',
+            'password'   => 'required|string|max:255',
+            'birth_date' => 'required|date|max:255',
+            'school_id'  => 'required|exists:schools,id',
         ]);
+        
         $teacher = User::create([
-            'last_name' => $validated['last_name'],
             'first_name' => $validated['first_name'],
-            'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
-            'school_id' => $validated['school_id'],
+            'last_name'  => $validated['last_name'],
+            'email'      => $validated['email'],
+            'password'   => bcrypt($validated['password']),
+            'birth_date' => $validated['birth_date'],
         ]);
-
+        
         UserSchool::create([
-            'user_id' => $teacher->id,
-            'school_id' => $teacher->school_id,
-            'role' => 'teacher',
+            'user_id'   => $teacher->id,
+            'school_id' => $validated['school_id'],
+            'role'      => 'teacher',
         ]);
+        
         // $teacher->last_name = $request->input('last_name');
         // $teacher->first_name = $request->input('first_name');
         // $teacher->email = $request->input('email');

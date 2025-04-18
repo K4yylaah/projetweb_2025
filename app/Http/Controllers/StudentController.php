@@ -26,18 +26,21 @@ class StudentController extends Controller
     public function store(Request $request)
     {   
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|max:255',
-            'date_of_birth' => 'required|date',
+            'birth_date' => 'required|date',
+            'school_id' => 'required|exists:schools,id',
         ]);
 
         // Logic to create a new student
         $student = User::create([
-            'name' => $validated['name'],
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
-            'date_of_birth' => $validated['date_of_birth'],
+            'birth_date' => $validated['date_of_birth'],
         ]);
 
         // Assuming you have a UserSchool model to associate the student with a school
