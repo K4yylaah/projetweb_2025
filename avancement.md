@@ -1,6 +1,3 @@
-Voici une version **corrigée**, **humanisée** et un peu plus fluide de ton texte, tout en gardant ton ton naturel et sincère. J’ai aussi réorganisé légèrement pour la clarté et ajouté des détails là où tu semblais vouloir en dire un peu plus :
-
----
 
 # 📌 Avancement du Projet Web 2025
 
